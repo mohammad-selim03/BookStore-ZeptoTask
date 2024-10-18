@@ -4,6 +4,7 @@ import HomePage from "../HomePage/HomePage";
 import WishlistPage from "../WishlistPage/WishlistPage";
 import Layout from "../Layout/Layout";
 import BooksPage from "../BooksPage/BooksPage";
+import BooksByGenre from "../Books/Books";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: "/book/:id",
         element: <BooksPage />,
+      },
+      {
+        path: "/books",
+        element: <BooksByGenre />,
       },
     ],
   },
