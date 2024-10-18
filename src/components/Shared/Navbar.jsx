@@ -100,11 +100,11 @@ const Navbar = () => {
                     onClick={handleLinkClick}
                   >
                     {menu.title}{" "}
-                    {menu.title === "wishlist" && (
+                    {/* {menu.title === "wishlist" && (
                       <span className="bg-white text-black h-4 w-4 rounded-full flex items-center justify-center text-xs ml-2 absolute -top-1 -right-4">
                         {wishlist.length}
                       </span>
-                    )}
+                    )} */}
                   </Link>
                 </li>
               ))}
