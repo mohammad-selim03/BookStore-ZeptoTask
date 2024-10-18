@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, ScrollRestoration } from "react-router-dom";
 import HomePage from "../HomePage/HomePage";
 import WishlistPage from "../WishlistPage/WishlistPage";
 import Layout from "../Layout/Layout";
@@ -9,11 +9,16 @@ import BooksByGenre from "../Books/Books";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <>
+        <Layout />,
+        <ScrollRestoration />
+      </>
+    ),
     children: [
       {
         index: true, // to makes it the default route
-        element: <HomePage />, 
+        element: <HomePage />,
       },
       {
         path: "/wishlist",

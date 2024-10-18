@@ -11,10 +11,9 @@ const SearchFiller = () => {
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
-    setIsDropdownOpen(true); // Open dropdown on input change
+    setIsDropdownOpen(true);  
   };
 
-  // Filter books based on the search term
   const filteredBooks = books?.filter((book) =>
     book.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -26,14 +25,12 @@ const SearchFiller = () => {
   };
 
   const handleSelectBook = () => {
-    setIsDropdownOpen(false); // Close dropdown when selecting a book
+    setIsDropdownOpen(false);  
   };
 
   useEffect(() => {
-    // Attach click event listener to the document
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // Clean up the event listener
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
@@ -43,33 +40,37 @@ const SearchFiller = () => {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <div className="w-full">
+      <div>
         <input
           type="text"
           placeholder="Search books..."
-          className="outline-none py-2 px-3 rounded-lg w-[600px]"
+          className="outline-none py-1 sm:py-2 px-2 sm:px-3 rounded-2xl w-52 sm:w-52 md:w-96 lg:w-[550px] placeholder:text-xs sm:placeholder:text-sm placeholder:-mt-4"
           value={searchTerm}
           onChange={handleChange}
-          onFocus={() => setIsDropdownOpen(true)} // Open dropdown on focus
+          onFocus={() => setIsDropdownOpen(true)}  
         />
-        <span className="absolute top-2.5 right-2">
+        <span className="absolute top-1.5 sm:top-2.5 right-2">
           <CiSearch size={20} />
         </span>
       </div>
       {isDropdownOpen && (
-        <div className="mt-4 min-[300px]:w-[full] w-[600px] absolute top-10 z-10 bg-white flex flex-col rounded-md h-[500px] overflow-hidden overflow-y-scroll shadow-gray-100 shadow-sm">
+        <div className="mt-4   w-60 md:w-[400px] lg:w-[600px] absolute top-10 -left-2 md:left-0 z-10 bg-white flex flex-col rounded-md h-[500px] overflow-hidden overflow-y-scroll shadow-gray-100 shadow-xl">
           {filteredBooks && filteredBooks.length > 0 ? (
             filteredBooks.map((book, index) => (
               <Link
                 to={`/book/${book?.id}`}
                 key={index}
                 className="hover:bg-slate-100 flex items-center gap-2 border-b px-10 py-3"
-                onClick={handleSelectBook} // Close dropdown on book selection
+                onClick={handleSelectBook} 
               >
                 <span className="py-2">
-                  <img src={book.formats["image/jpeg"]} alt="book image" className="h-9 w-9 rounded-md" />
+                  <img
+                    src={book.formats["image/jpeg"]}
+                    alt="book image"
+                    className="h-9 w-9"
+                  />
                 </span>
-                <span className="py-2">{book.title}</span>
+                <span className="py-2 text-xs md:text-sm">{book.title}</span>
               </Link>
             ))
           ) : (

@@ -42,7 +42,7 @@ const BooksByGenre = () => {
           ))}
         </ul>
       ) : (
-        <p>No books found for this genre.</p>
+        <p className="text-center font-semibold mt-10">No books found for this genre.!</p>
       )}
     </div>
   );

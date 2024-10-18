@@ -4,7 +4,6 @@ import Books from "./Books";
 const HomePage = () => {
   return (
     <div>
-      {" "}
       <Books />
     </div>
   );

@@ -6,18 +6,6 @@ import WishlistButton from "../WishlistPage/WishlistButton";
 
 const BooksPage = () => {
   const { id } = useParams();
-  console.log("id", id);
-
-  // useEffect(() => {
-  //     const fetchBook = async() => {
-  //         const res = await fetch `https://gutendex.com/books` // there was a problem with dynamic id pass.
-  //         const data = await res.json()
-  //         console.log(data)
-
-  //     }
-  //     fetchBook()
-  // } , [])
-
   const { books, loading, error } = useFetchBooks("https://gutendex.com/books");
 
   if (loading) {
@@ -28,10 +16,10 @@ const BooksPage = () => {
   }
 
   const book = books.find((book) => book?.id === Number(id));
-  console.log("filter book", book);
+  // console.log("filter book", book);
 
   return (
-    <div className="bg-slate-100 py-2 md:py-5 px-3 md:px-10 rounded-md">
+    <div className="bg-slate-100 py-2 md:py-5 px-3 md:px-10 rounded-md min-h-screen">
       {book ? (
         <div className="grid grid-cols-1 items-center justify-center md:grid-cols-2 gap-2 md:gap-8">
           <div className="flex items-center justify-center">
@@ -52,16 +40,29 @@ const BooksPage = () => {
             <p>
               By <span className="text-gray-600">{book?.authors[0]?.name}</span>
             </p>
-            {/* price */}
-            {/* descriptions */}
-            {/* quantity button */}
-            {/* add to cart */}
-            {/* add to wishlist and share  */}
-            <div className="mt-2">
-              <p className="text-gray-500 text-sm line-clamp-2">
-                {" "}
-                {book.subjects.join(", ")}
-              </p>
+            <p className="text-gray-500">ID : {id}</p>
+
+            <div className="flex justify-between">
+              <div className="mt-2 flex flex-col gap-2">
+                <h3 className="text-md font-semibold block">Subjects</h3>
+                <p className="text-gray-500 text-sm line-clamp-2gap-2 flex flex-col ">
+                  {" "}
+                  {book.subjects?.map((item) => (
+                    <p>{item}</p>
+                  ))}
+                  {/* //.join(", ") */}
+                </p>
+              </div>
+              <div className="mt-2 flex flex-col gap-2">
+              <h3 className="text-md font-semibold block">Bookshelves</h3>
+
+                <p className="text-gray-500 text-sm line-clamp-2gap-2 flex flex-col ">
+                  {" "}
+                  {book.bookshelves?.map((item) => (
+                    <p>{item}</p>
+                  ))}
+                </p>
+              </div>
             </div>
           </div>
         </div>

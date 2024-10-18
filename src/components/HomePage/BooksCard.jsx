@@ -8,14 +8,14 @@ const BooksCard = ({ book, wishlistPage, onUpdateWishlist }) => {
     <div key={book?.id}>
       <div
         key={book.id}
-        className="book-item   px-3 py-2 rounded-md h-96 relative"
+        className="book-item  border border-gray-200 hover:border-gray-500 transition-all duration-200 px-3 py-2 rounded-md h-96 relative"
       >
         <Link to={`/book/${book?.id}`}>
           <div className="flex items-center justify-center">
             <img
               src={book.formats["image/jpeg"]}
               alt={book.title}
-              className="   h-60 w-52"
+              className="h-52 w-32"
             />
           </div>
           {/* <p>ID: {book.id}</p> */}
@@ -31,7 +31,7 @@ const BooksCard = ({ book, wishlistPage, onUpdateWishlist }) => {
           </div>
         </Link>
 
-        <div className="bg-white shadow-gray-300 shadow-md  rounded-full absolute top-2 right-3 ">
+        <div className="bg-white shadow-gray-300 shadow-md  rounded-full absolute top-1 right-3 ">
           <WishlistButton book={book} onUpdateWishlist={onUpdateWishlist}/>
         </div>
       </div>
