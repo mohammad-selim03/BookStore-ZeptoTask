@@ -21,7 +21,7 @@ const BooksCard = ({ book, wishlistPage, onUpdateWishlist }) => {
           </div>
           {/* <p>ID: {book.id}</p> */}
           <div className="mt-2">
-            <p className="text-gray-500 text-sm">
+            <p className="text-gray-500 text-sm truncate">
               {book.authors.map((author) => author.name).join(", ")}
             </p>
             <p className="font-semibold truncate mb-2"> {book.title}</p>
@@ -35,8 +35,8 @@ const BooksCard = ({ book, wishlistPage, onUpdateWishlist }) => {
         <div className="bg-white shadow-gray-300 shadow-md  rounded-full absolute top-1 right-3 ">
           <WishlistButton book={book} onUpdateWishlist={onUpdateWishlist} />
         </div>
-        <div className="translate-x-80 group-hover:translate-x-0 transition-all duration-300 mt-4 w-4/5  mx-auto ">
-          <button className="text-white  rounded-xl bg-black/90 hover:bg-black flex items-center gap-1 px-3 py-1.5 ml-2">
+        <div className="translate-x-80 group-hover:translate-x-0 transition-all duration-300 mt-4 w-full   ">
+          <button className="text-white  rounded-xl bg-black/90 hover:bg-black flex items-center gap-1 px-3 py-1.5 mx-auto ">
             <BsCartPlus size={20} /> Add to cart
           </button>
         </div>

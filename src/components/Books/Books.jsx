@@ -32,7 +32,7 @@ const BooksByGenre = () => {
     <div className="px-3 md:px-10 py-2 md:py-5">
       <h1 className="text-center text-md sm:text-lg md:text-2xl font-semibold">Books in "{genre}"</h1>
       {booksByGenre.length > 0 ? (
-        <ul  className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 mt-10">
+        <ul  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mt-10">
           {booksByGenre.map((book) => (
             // <li key={book.id}>{book.title}</li>
             <div>
