@@ -16,7 +16,6 @@ const BooksPage = () => {
   }
 
   const book = books.find((book) => book?.id === Number(id));
-  // console.log("filter book", book);
 
   return (
     <div className="bg-slate-100 py-2 md:py-5 px-3 md:px-10 rounded-md min-h-screen">
@@ -54,7 +53,7 @@ const BooksPage = () => {
                 </p>
               </div>
               <div className="mt-2 flex flex-col gap-2">
-              <h3 className="text-md font-semibold block">Bookshelves</h3>
+                <h3 className="text-md font-semibold block">Bookshelves</h3>
 
                 <p className="text-gray-500 text-sm line-clamp-2gap-2 flex flex-col ">
                   {" "}

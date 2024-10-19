@@ -12,7 +12,7 @@ const BooksByGenre = () => {
 
   useEffect(() => {
     if (books) {
-      // Filter books by the selected genre
+     
       const filteredBooks = books.filter((book) =>
         book.bookshelves?.includes(genre)
       );
