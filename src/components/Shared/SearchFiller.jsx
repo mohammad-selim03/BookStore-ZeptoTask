@@ -1,17 +1,36 @@
 import React, { useState, useEffect, useRef } from "react";
 import { CiSearch } from "react-icons/ci";
 import useFetchBooks from "../API/Api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SearchFiller = () => {
   const { books, loading, error } = useFetchBooks("https://gutendex.com/books");
   const [searchTerm, setSearchTerm] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedSearchTerm = localStorage.getItem("searchTerm");
+    if (savedSearchTerm) {
+      setSearchTerm(savedSearchTerm);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("searchTerm", searchTerm);
+  }, [searchTerm]);
+
+  const getSelectedBooks = () => {
+    const savedBooks = localStorage.getItem("selectedBooks");
+    return savedBooks ? JSON.parse(savedBooks) : [];
+  };
+
+  const [selectedBooks, setSelectedBooks] = useState(getSelectedBooks());
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
-    setIsDropdownOpen(true);  
+    setIsDropdownOpen(true);
   };
 
   const filteredBooks = books?.filter((book) =>
@@ -24,8 +43,14 @@ const SearchFiller = () => {
     }
   };
 
-  const handleSelectBook = () => {
-    setIsDropdownOpen(false);  
+  const handleSelectBook = (book) => {
+    if (!selectedBooks.find((b) => b.id === book.id)) {
+      const updatedBooks = [...selectedBooks, book];
+      setSelectedBooks(updatedBooks);
+      localStorage.setItem("selectedBooks", JSON.stringify(updatedBooks));
+    }
+    setIsDropdownOpen(false);
+    navigate(`/book/${book.id}`);
   };
 
   useEffect(() => {
@@ -47,21 +72,20 @@ const SearchFiller = () => {
           className="outline-none py-1 sm:py-2 px-2 sm:px-3 rounded-2xl w-52 sm:w-52 md:w-96 lg:w-[550px] placeholder:text-xs sm:placeholder:text-sm placeholder:-mt-4"
           value={searchTerm}
           onChange={handleChange}
-          onFocus={() => setIsDropdownOpen(true)}  
+          onFocus={() => setIsDropdownOpen(true)}
         />
         <span className="absolute top-1.5 sm:top-2.5 right-2">
           <CiSearch size={20} />
         </span>
       </div>
       {isDropdownOpen && (
-        <div className="mt-4   w-60 md:w-[400px] lg:w-[600px] absolute top-10 -left-2 md:left-0 z-10 bg-white flex flex-col rounded-md h-[500px] overflow-hidden overflow-y-scroll shadow-gray-100 shadow-xl">
+        <div className="mt-4 w-60 md:w-[400px] lg:w-[600px] absolute top-10 -left-2 md:left-0 z-10 bg-white flex flex-col rounded-md h-[500px] overflow-hidden overflow-y-scroll shadow-gray-100 shadow-xl">
           {filteredBooks && filteredBooks.length > 0 ? (
-            filteredBooks.map((book, index) => (
-              <Link
-                to={`/book/${book?.id}`}
-                key={index}
-                className="hover:bg-slate-100 flex items-center gap-2 border-b px-10 py-3"
-                onClick={handleSelectBook} 
+            filteredBooks.map((book) => (
+              <div
+                key={book.id}
+                className="hover:bg-slate-100 flex items-center gap-2 border-b px-10 py-3 cursor-pointer"
+                onClick={() => handleSelectBook(book)}
               >
                 <span className="py-2">
                   <img
@@ -71,10 +95,12 @@ const SearchFiller = () => {
                   />
                 </span>
                 <span className="py-2 text-xs md:text-sm">{book.title}</span>
-              </Link>
+              </div>
             ))
           ) : (
-            <div>No books found</div>
+            <div className="text-center mt-10 font-semibold">
+              No books found
+            </div>
           )}
         </div>
       )}

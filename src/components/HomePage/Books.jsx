@@ -33,7 +33,7 @@ const Books = () => {
       <div className="flex items-center justify-between px-5">
         <div className=" py-10">
           {" "}
-          <h3 className="text-lg md:text-lg font-semibold px-5 md:px-10">
+          <h3 className="text-lg md:text-2xl font-semibold px-5 md:px-10">
             Explore your books
           </h3>
         </div>

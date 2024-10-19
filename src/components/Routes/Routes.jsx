@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        index: true, // to makes it the default route
+        index: true,  
         element: <HomePage />,
       },
       {

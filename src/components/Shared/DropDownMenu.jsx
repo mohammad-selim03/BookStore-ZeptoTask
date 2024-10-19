@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import { useNavigate } from "react-router-dom"; // Updated import
+import { useNavigate } from "react-router-dom";  
 import useFetchBooks from "../API/Api";
 import Loader from "../HomePage/Loader";
 
 const DropDownMenu = () => {
   const [select, setSelect] = useState(false);
   const dropdownRef = useRef(null);
-  const navigate = useNavigate(); // Updated to useNavigate
+  const navigate = useNavigate();  
 
   const handleDropDown = () => {
     setSelect((prev) => !prev);
@@ -15,7 +15,7 @@ const DropDownMenu = () => {
 
   const handleSelectItem = (genre) => {
     setSelect(false);
-    navigate(`/books?genre=${encodeURIComponent(genre)}`); // Updated navigation
+    navigate(`/books?genre=${encodeURIComponent(genre)}`);  
   };
 
   const handleClickOutside = (event) => {
@@ -41,7 +41,6 @@ const DropDownMenu = () => {
     return <p>{error.message || "An error occurred"}</p>;
   }
 
-  // Collect unique bookshelves, removing "Browsing:" prefix
   const uniqueBookshelves = new Set();
 
   books?.forEach((book) => {

@@ -23,7 +23,7 @@ const WishlistButton = ({ book, onUpdateWishlist }) => {
       onUpdateWishlist(existingWishlist);  
       toast.success("Book added to wishlist!");
     } else {
-      // Remove book from the wishlist
+     
       const updatedWishlist = existingWishlist.filter((item) => item.id !== book.id);
       localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
       setIsInWishlist(false);
